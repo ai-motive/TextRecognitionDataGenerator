@@ -38,7 +38,7 @@ def parse_arguments(argv):
         description="Generate synthetic text data for text recognition."
     )
     parser.add_argument(
-        "--ini_fname", required=True, help="Run custom code ini filename"
+        "--ini_fname", help="Run custom code ini filename"
     )
     parser.add_argument(
         "--output_dir", type=str, nargs="?", help="The output directory", default="out/"
@@ -356,6 +356,7 @@ def update_args_by_ini(args, ini):
     args.fit = True if ini['fit'] == 'True' else False
     args.font = ini['font'] if ini['font'] else False
     args.case = ini['case']
+    args.font_dir = ini['font_dir']
     return args
 
 
@@ -363,8 +364,9 @@ def main(args):
     """
         Description: Main function
     """
-    ini = get_ini_parameters(os.path.join(_this_folder_, args.ini_fname))
-    args = update_args_by_ini(args, ini['TRDG'])
+    if args.ini_fname:
+        ini = get_ini_parameters(os.path.join(_this_folder_, args.ini_fname))
+        args = update_args_by_ini(args, ini['TRDG'])
 
     # # Check key & value
     # for key, value in vars(args).items():
@@ -497,7 +499,7 @@ def main(args):
 
 SELF_TEST_ = True
 # OP_MODE = 'standalone'  # standalone / server
-INI_FNAME = _this_basename_ + '_2' + ".ini"
+INI_FNAME = _this_basename_ + "_ko.ini"
 IN_PATH = "./texts/test.txt"
 OUT_PATH = "./out/"
 
