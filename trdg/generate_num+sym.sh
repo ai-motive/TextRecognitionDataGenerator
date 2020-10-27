@@ -6,9 +6,9 @@ round() {
   printf "%.${2}f" "${1}"
 }
 
-INPUT_PATH='./texts/english_texts.txt'
+INPUT_PATH='./texts/number+symbol_texts.txt'
 imgH=64
-num_imgs=$((207*1))
+num_imgs=$((240*1))
 
 # Train / Test ratio (8:2)
 train_ratio=0.8
@@ -41,76 +41,76 @@ printf "[TOTAL] Total images : %s\n" $total_cnt
 
 # [Basic images] -> (num_fonts(11) * num_text_sequences(4))
 python run_custom.py \
-  --output_dir out/en/train/basic --input_file $INPUT_PATH  --language en --count $train_basic_cnt \
+  --output_dir out/num+sym/train/basic --input_file $INPUT_PATH  --language num+sym --count $train_basic_cnt \
   --format $imgH --background 1 --name_format 2 --margins 0,0,0,0 --fit \
-  --font_dir ./fonts/en/
+  --font_dir ./fonts/num+sym/
 printf "[TRAIN] Basic images generated : %s\n" $train_basic_cnt
 python run_custom.py \
-  --output_dir out/en/test/basic --input_file $INPUT_PATH  --language en --count $test_basic_cnt \
+  --output_dir out/num+sym/test/basic --input_file $INPUT_PATH  --language num+sym --count $test_basic_cnt \
   --format $imgH --background 1 --name_format 2 --margins 0,0,0,0 --fit \
-  --font_dir ./fonts/en/
+  --font_dir ./fonts/num+sym/
 printf "[TEST] Basic images generated : %s\n" $test_basic_cnt
 
 # [Skew images] -> (num_fonts(11) * num_text_sequences(4))
 python run_custom.py \
-  --output_dir out/en/train/skew --input_file $INPUT_PATH --language en --count $train_skew_cnt \
+  --output_dir out/num+sym/train/skew --input_file $INPUT_PATH --language num+sym --count $train_skew_cnt \
   --format $imgH --skew_angle 2 --random_skew --background 1 \
-  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 printf "[TRAIN] Skew images generated : %s\n" $train_skew_cnt
 python run_custom.py \
-  --output_dir out/en/test/skew --input_file $INPUT_PATH --language en --count $test_skew_cnt \
+  --output_dir out/num+sym/test/skew --input_file $INPUT_PATH --language num+sym --count $test_skew_cnt \
   --format $imgH --skew_angle 2 --random_skew --background 1 \
-  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 printf "[TEST] Skew images generated : %s\n" $test_skew_cnt
 
 #    ## 스캔 문서에는 왜곡이 거의 없음
 ## [Dist.] -> (num_fonts(11) * num_text_sequences(4))
 #    python run_custom.py \
-#      --output_dir out/en/train/dist --input_file $INPUT_PATH --language en --count $train_dist_cnt \
+#      --output_dir out/num+sym/train/dist --input_file $INPUT_PATH --language num+sym --count $train_dist_cnt \
 #      --format $imgH --distorsion 3 --distorsion_orientation 2 --background 1 \
-#      --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+#      --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 # printf "[TRAIN] Dist. images generated : %s\n" $train_dist_cnt
 #    python run_custom.py \
-#      --output_dir out/en/test/dist --input_file $INPUT_PATH --language en --count $test_dist_cnt \
+#      --output_dir out/num+sym/test/dist --input_file $INPUT_PATH --language num+sym --count $test_dist_cnt \
 #      --format $imgH --distorsion 3 --distorsion_orientation 2 --background 1 \
-#      --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+#      --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 # printf "[TEST] Dist. images generated : %s\n" $test_dist_cnt
 
 ## [Blur Images] -> (num_fonts(11) * num_text_sequences(4))
 python run_custom.py \
-  --output_dir out/en/train/blur --input_file $INPUT_PATH --language en --count $train_blur_cnt \
+  --output_dir out/num+sym/train/blur --input_file $INPUT_PATH --language num+sym --count $train_blur_cnt \
   --format $imgH --blur 1 --random_blur --background 1 \
-  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 printf "[TRAIN] Blur images generated : %s\n" $train_blur_cnt
 python run_custom.py \
-  --output_dir out/en/test/blur --input_file $INPUT_PATH --language en --count $test_blur_cnt \
+  --output_dir out/num+sym/test/blur --input_file $INPUT_PATH --language num+sym --count $test_blur_cnt \
   --format $imgH --blur 1 --random_blur --background 1 \
-  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 printf "[TEST] Blur images generated : %s\n" $test_blur_cnt
 
 # [Gaussian Images] -> (num_fonts(11) * num_text_sequences(4))
 # Gaussian noise
 python run_custom.py \
-  --output_dir out/en/train/back --input_file $INPUT_PATH --language en --count $train_gaussian_cnt \
+  --output_dir out/num+sym/train/back --input_file $INPUT_PATH --language num+sym --count $train_gaussian_cnt \
   --format $imgH --background 0 \
-  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 printf "[TRAIN] Gaussian noise images generated : %s\n" $train_gaussian_cnt
 python run_custom.py \
-  --output_dir out/en/test/back --input_file $INPUT_PATH --language en --count $test_gaussian_cnt \
+  --output_dir out/num+sym/test/back --input_file $INPUT_PATH --language num+sym --count $test_gaussian_cnt \
   --format $imgH --background 0 \
-  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 printf "[TEST] Gaussian noise images generated : %s\n" $test_gaussian_cnt
 
 # [Custom background images] -> (num_fonts(11) * num_text_sequences(4))
 python run_custom.py \
-  --output_dir out/en/train/back --input_file $INPUT_PATH --language en --count $train_custom_cnt \
+  --output_dir out/num+sym/train/back --input_file $INPUT_PATH --language num+sym --count $train_custom_cnt \
   --format $imgH --background 3 \
-  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 printf "[TRAIN] Custom background images generated : %s\n" $train_custom_cnt
 python run_custom.py \
-  --output_dir out/en/test/back --input_file $INPUT_PATH --language en --count $test_custom_cnt \
+  --output_dir out/num+sym/test/back --input_file $INPUT_PATH --language num+sym --count $test_custom_cnt \
   --format $imgH --background 3 \
-  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/en/
+  --name_format 2 --margins 0,0,0,0 --fit --font_dir ./fonts/num+sym/
 printf "[TEST] Custom background images generated : %s\n" $test_custom_cnt
 
 printf "[TRAIN] Total images generated : %s\n" $train_total_cnt

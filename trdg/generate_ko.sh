@@ -8,7 +8,7 @@ round() {
 
 INPUT_PATH='./texts/korean_texts.txt'
 imgH=64
-num_imgs=$((44*1))
+num_imgs=$((37*1))
 
 # Train / Test ratio (8:2)
 train_ratio=0.8
